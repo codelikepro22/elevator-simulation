@@ -1,6 +1,7 @@
 import { Box, ButtonGroup, Stack, Typography } from '@mui/material';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { LAST_FLOOR } from '../constants/elevator';
+import { useElevatorContext } from '../context/ElevatorContext';
 import ElevatorButton from './ElevatorButton';
 import Floor from './Floor';
 
@@ -13,6 +14,10 @@ for (let floorNo = LAST_FLOOR; floorNo >= 0; floorNo--) {
 }
 
 const Elevator = () => {
+  const { state, dispatch } = useElevatorContext();
+  useEffect(() => {
+    console.log('state:', state, 'dispatch:', dispatch);
+  }, [state, dispatch]);
   return (
     <Box sx={{ display: 'flex', gap: 10 }}>
       <Box sx={{ textAlign: 'center' }}>
