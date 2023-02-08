@@ -1,7 +1,8 @@
-import { Box, IconButton, Stack } from '@mui/material';
+import { Box, IconButton, Stack, Typography } from '@mui/material';
 import { LAST_FLOOR } from '../constants/elevator';
 import { useElevatorContext } from '../context/ElevatorContext';
 import { ActionType, Direction } from '../types/elevator';
+import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
 
 type Props = {
   floorNo: number;
@@ -58,26 +59,52 @@ const Floor = ({ floorNo }: Props) => {
           ></Box>
         </IconButton>
       </Stack>
-      <Box
-        sx={{
-          width: 90,
-          height: 90,
-          backgroundColor:
-            floorNo === currentFloor
-              ? requestedFloors[floorNo] === elevatorDirection ||
-                requestedFloors[floorNo] === 'both'
-                ? '#ed6c02'
-                : '#13B38B'
-              : '#4D4D68',
-          color: 'white',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '2rem',
-          borderRadius: 4,
-        }}
-      >
-        {floorNo}
+      <Box sx={{ position: 'relative' }}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            width: '31%',
+            height: '21%',
+            backgroundColor: 'black',
+            color: '#ed6c02',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            alignItems: 'center',
+            fontFamily: 'Orbitron',
+          }}
+        >
+          <Typography sx={{ fontFamily: 'Orbitron', fontSize: '0.8rem' }}>
+            {currentFloor}
+          </Typography>
+          {elevatorDirection === 'up' ? (
+            <ArrowUpward fontSize="small" />
+          ) : (
+            <ArrowDownward fontSize="small" />
+          )}
+        </Box>
+        <Box
+          sx={{
+            width: 90,
+            height: 90,
+            backgroundColor:
+              floorNo === currentFloor
+                ? requestedFloors[floorNo] === elevatorDirection ||
+                  requestedFloors[floorNo] === 'both'
+                  ? '#ed6c02'
+                  : '#13B38B'
+                : '#4D4D68',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '2rem',
+            borderRadius: 4,
+          }}
+        >
+          {floorNo}
+        </Box>
       </Box>
     </Box>
   );
