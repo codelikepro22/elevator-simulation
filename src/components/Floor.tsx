@@ -15,6 +15,12 @@ const Floor = ({ floorNo }: Props) => {
   } = useElevatorContext();
 
   const requestElevator = (direction: Direction) => {
+    /* 
+    if the floor already requested by inner buttons then it has more priority 
+    and the elevator has to open in this floor anyway (stored value as "both")
+    no need to add it using these outside buttons
+    */
+    if (requestedFloors[floorNo] === 'both') return;
     dispatch({
       type: ActionType.UPDATE_REQUESTED_FLOORS,
       payload: { ...requestedFloors, [floorNo]: direction },
